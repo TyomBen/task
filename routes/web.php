@@ -15,9 +15,12 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/my_list', [UserController::class, 'user']);
+// Route::get('/my_list', [UserController::class, 'user']);
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/my_list', [UserController::class, 'user'])->name('my_app')->middleware('crud');
 // Route::post('/crud', [UserController::class, 'user']);
+Route::get('classic_user_crud', function () {
+    return view('classic_user_crud');
+})->name('classic_user');

@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = 'my_list';
 
     /**
      * Create a new controller instance.
@@ -68,6 +68,13 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+        ]);
+    }
+    public function crudRoute ()
+    {
+        $users = User::all();
+        return view ('my_list', [
+            'users' => $users
         ]);
     }
 }
