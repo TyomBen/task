@@ -1,25 +1,20 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\UsersController;
 
-// Route::get('/my_list', [UserController::class, 'user']);
+
 
 Auth::routes();
 
-Route::get('/my_list', [UserController::class, 'user'])->name('my_app')->middleware('crud');
+Route::get('/my_list', [UsersController::class, 'index'])->name('my_app')->middleware('crud');
+Route::get('edit/{user}', [UsersController::class, 'edit'])->name('edit');
+Route::put('update', [UsersController::class, 'update'])->name('update');
+Route::get('/create', [UsersController::class, 'create'])
+->name('create');
+Route::post('/store', [UsersController::class, 'store'])
+->name('store');
 // Route::post('/crud', [UserController::class, 'user']);
 Route::get('classic_user_crud', function () {
     return view('classic_user_crud');
