@@ -9,7 +9,33 @@
 </head>
 
 <body>
-    <a href="{{ route('create') }}" class="btn btn-primary">Create User</a>
+    <a href="{{ route('create') }}" class="btn btn-primary">Create Article</a>
+    <input type="text" id="searchInput" placeholder="Search..." >
+    <ul id="searchResults"></ul>
+    <script>
+    document.getElementById('searchInput').addEventListener('input', async function() {
+    const searchQuery = this.value;
+
+    if (searchQuery.length > 0) {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/search?query=${searchQuery}`);
+            const data = await response.json();
+            const searchResults = document.getElementById('searchResults');
+            searchResults.innerHTML = '';
+            data.forEach(result => {
+                const li = document.createElement('li');
+                li.textContent = result.title;
+                searchResults.appendChild(li);
+            });
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    } else {
+        searchResults.innerHTML = '';
+    }
+});
+</script>
+
     <div class="container mt-5">
 
 
@@ -18,16 +44,16 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Имя</th>
-                    <th>Email</th>
+                    <th>Text</th>
+                    <th>Content</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+                @foreach ($articles as $article)
                 <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }} <a href="{{route ('edit', [$user->id]) }}">Edit </a> <a href = '' >Delete</a></td>
+                    <td>{{ $article->id }}</td>
+                    <td>{{ $article->title }}</td>
+                    <td>{{ $article->content }} <a href={{route ('edit', $article->id) }}>Edit </a> <a href = {{route('delete', $article->id)}} >Delete</a></td>
 
                 </tr>
                 @endforeach

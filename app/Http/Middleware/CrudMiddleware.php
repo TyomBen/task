@@ -20,9 +20,7 @@ class CrudMiddleware
         if (Auth::check()) {
             return $next($request);
         }else {
-            $users = User::all();
-            return redirect()->route('classic_user', [
-                'users' => $users]);
-        }
+            return redirect()->route('classic_user');
     }
+}
 }

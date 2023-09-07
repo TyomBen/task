@@ -11,16 +11,16 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
 
-                <form action="{{route('update') }}" method="POST">
+                <form action={{route('update', $article->id )}} method="POST">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Name</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name" name="name">
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title" name="title" value="{{ $article->title }}">
                         <label for="exampleFormControlInput1">Email</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="email" name="email">
+                        <input type="Content" class="form-control" id="exampleFormControlInput1" placeholder="Content" name="content" value="{{ $article->content }}">
                     </div>
-                    <button type="submit" class="btn btn-primary">Отправить</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>

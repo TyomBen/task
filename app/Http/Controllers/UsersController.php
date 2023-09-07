@@ -3,18 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
-        return view('my_list', compact('users'));
+
+
+        $articles = Article::all();
+        return view('my_list', [
+            'articles' => $articles,
+        ]);
     }
 
     /**
@@ -30,10 +36,11 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email
+        Article::create([
+            'title' => $request->title,
+            'content' => $request->content
         ]);
+
         return redirect()->route('my_app');
     }
 
@@ -48,35 +55,36 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $user, Request $request)
+    public function edit(Article $articles, Request $request)
     {
-        return view('edit', compact('user'));
+        if (Auth::user()->id !== $articles->user_id){
+            return redirect()->back()->withErrors(['msg' => "You can edit only your articles"]);
+        };
+        $article = Article::find($articles->id);
+        return view('edit', compact('article'));
     }
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Article $articles)
     {
-        $request->validate([
-            'name' => 'string',
-            'email' => 'string',
+        $articles->update([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
         ]);
-
-        $user->update([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-        ]);
-
+        // if (dd(Auth::user()->id !== User::))
         return redirect()->route('my_app');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id, Request $request)
+    public function destroy(Article $articles, Request $request)
     {
-        $user = User::find($id);
-        $user->delete($request->all());
-        redirect()->route('edit');
+        $articles->delete([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+        ]);
+        return redirect()->route('my_app');
     }
 }

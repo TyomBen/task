@@ -14,22 +14,21 @@
 
 
 
-        <h2 class="mt-5">Список данных</h2>
+        <h2 class="mt-5">Data</h2>
         <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Имя</th>
-                    <th>Email</th>
+                    <th>Title</th>
+                    <th>Content</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
+                @foreach ($articles as $article)
                 <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }} </td>
-
+                    <td>{{ $article->id }}</td>
+                    <td>{{ $article->title }}</td>
+                    <td>{{ $article->content }}</td>
                 </tr>
                 @endforeach
             </tbody>

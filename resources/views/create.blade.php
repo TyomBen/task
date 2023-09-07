@@ -13,12 +13,12 @@
                 <form action="{{ route('store') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Name</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Name" name="name">
-                        <label for="exampleFormControlInput1">Email</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="email" name="email">
+                        <label for="exampleFormControlInput1">Text</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title" name="title">
+                        <label for="exampleFormControlInput1">Content</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Content" name="content">
                     </div>
-                    <button type="submit" class="btn btn-primary">Отправить</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
