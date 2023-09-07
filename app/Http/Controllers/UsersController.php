@@ -72,7 +72,6 @@ class UsersController extends Controller
             'title' => $request->input('title'),
             'content' => $request->input('content'),
         ]);
-        // if (dd(Auth::user()->id !== User::))
         return redirect()->route('my_app');
     }
 
@@ -81,6 +80,9 @@ class UsersController extends Controller
      */
     public function destroy(Article $articles, Request $request)
     {
+        if (Auth::user()->id !== $articles->user_id){
+            return redirect()->back()->withErrors(['msg' => "You can delete only your articles"]);
+        };
         $articles->delete([
             'title' => $request->input('title'),
             'content' => $request->input('content'),

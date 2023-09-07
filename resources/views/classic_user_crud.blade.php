@@ -29,6 +29,7 @@
                     <td>{{ $article->id }}</td>
                     <td>{{ $article->title }}</td>
                     <td>{{ $article->content }}</td>
+
                 </tr>
                 @endforeach
             </tbody>

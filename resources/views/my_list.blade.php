@@ -54,6 +54,11 @@
                     <td>{{ $article->id }}</td>
                     <td>{{ $article->title }}</td>
                     <td>{{ $article->content }} <a href={{route ('edit', $article->id) }}>Edit </a> <a href = {{route('delete', $article->id)}} >Delete</a></td>
+                    @if ($errors->has('msg'))
+                    <div class="alert alert-danger">
+                        {{ $errors->first('msg') }}
+                    </div>
+                @endif
 
                 </tr>
                 @endforeach
