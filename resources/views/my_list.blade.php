@@ -60,13 +60,14 @@
                     <tr>
                         <td>{{ $article->id }}</td>
                         <td>{{ $article->title }}</td>
+                        @if ($article->user_id != Auth::user()->id)
+                        <td>{{ $article->content }} </td>
+                        @else
                         <td>{{ $article->content }} <a href={{route ('edit', $article->id) }}>Edit </a> <a href = {{route('delete', $article->id)}} >Delete</a></td>
-
+                        @endif
                     </tr>
 
                     @endforeach
-
-                
 
             </tbody>
         </table>
