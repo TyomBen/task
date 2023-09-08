@@ -45,25 +45,29 @@
             {{ $errors->first('msg') }}
         </div>
     @endif
-        
+
         <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Text</th>
+                    <th>Title</th>
                     <th>Content</th>
                 </tr>
             </thead>
             <tbody>
 
-                @foreach ($articles as $article)
-                <tr>
-                    <td>{{ $article->id }}</td>
-                    <td>{{ $article->title }}</td>
-                    <td>{{ $article->content }} <a href={{route ('edit', $article->id) }}>Edit </a> <a href = {{route('delete', $article->id)}} >Delete</a></td>
+                    @foreach ($articles as $article)
+                    <tr>
+                        <td>{{ $article->id }}</td>
+                        <td>{{ $article->title }}</td>
+                        <td>{{ $article->content }} <a href={{route ('edit', $article->id) }}>Edit </a> <a href = {{route('delete', $article->id)}} >Delete</a></td>
 
-                </tr>
-                @endforeach
+                    </tr>
+
+                    @endforeach
+
+                
+
             </tbody>
         </table>
 

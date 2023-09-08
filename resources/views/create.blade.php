@@ -13,7 +13,7 @@
                 <form action="{{ route('store') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">Text</label>
+                        <label for="exampleFormControlInput1">Title</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title" name="title">
                         <label for="exampleFormControlInput1">Content</label>
                         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Content" name="content">

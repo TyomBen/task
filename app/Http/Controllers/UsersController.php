@@ -38,7 +38,8 @@ class UsersController extends Controller
     {
         Article::create([
             'title' => $request->title,
-            'content' => $request->content
+            'content' => $request->content,
+            'user_id' => Auth::user()->id
         ]);
 
         return redirect()->route('my_app');
