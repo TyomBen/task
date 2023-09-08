@@ -63,7 +63,7 @@
                         @if ($article->user_id != Auth::user()->id)
                         <td>{{ $article->content }} </td>
                         @else
-                        <td>{{ $article->content }} <a href={{route ('edit', $article->id) }}>Edit </a> <a href = {{route('delete', $article->id)}} >Delete</a></td>
+                        <td>{{ $article->content }} <a href={{route ('edit', $article->id) }} class='text-primary'>Edit </a> <a href = {{route('delete', $article->id)}} class='text-danger' >Delete</a></td>
                         @endif
                     </tr>
 
